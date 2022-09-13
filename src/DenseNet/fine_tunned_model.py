@@ -11,13 +11,14 @@ def __freeze_trained_layers(model):
     return model
 
 def create():
-    model = torch.hub.load('pytorch/vision:v0.10.0', 'densenet121', pretrained=True)
+    model = torch.hub.load('pytorch/vision:v0.10.0', 'densenet201', pretrained=True)
+    model.features.add_module("avg_pool", nn.AdaptiveAvgPool2d((1, 1)))
 
     # Verifica se será necessário cogelar os calculos de gradientes
     model = __freeze_trained_layers(model)
 
     # Criando a nova fully connected
-    model.classifier = nn.Linear(1024, 2)
+    model.classifier = nn.Linear(1920, 2)
 
     # Verificando disponibilidade CUDA
     if torch.cuda.is_available():
@@ -27,3 +28,5 @@ def create():
         print("CUDA unavailable. Model optimized to use CPU")
 
     return model
+
+create()

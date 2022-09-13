@@ -13,7 +13,7 @@ def __freeze_trained_layers(model):
 
 def create(n_classes: int, pre_trained: bool, train_just_fc: bool):
     model = net.resnet50(pre_trained)
-
+    print(model)
     # Verifica se será necessário cogelar os calculos de gradientes
     if train_just_fc:
         model = __freeze_trained_layers(model)
@@ -29,3 +29,5 @@ def create(n_classes: int, pre_trained: bool, train_just_fc: bool):
         print("CUDA unavailable. Model optimized to use CPU")
 
     return model
+
+create(2, False, False)
