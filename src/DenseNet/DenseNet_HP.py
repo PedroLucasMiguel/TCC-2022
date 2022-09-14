@@ -1,7 +1,7 @@
 #Parametros para amostras
 #BATCH_SIZE = 58
 EPOCHS = 50
-BATCH_SIZE = 58
+BATCH_SIZE = 1
 
 #Parametros de treino
 LEARNING_RATE = 0.0001

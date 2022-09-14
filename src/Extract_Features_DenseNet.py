@@ -1,12 +1,7 @@
 import torch
-import torch.nn as nn
 from torchvision import datasets
 from torch.utils.data.sampler import SubsetRandomSampler
 import torchvision.transforms as transforms
-import PIL
-from PIL import Image
-import numpy as np
-# from ResNet50 import fine_tunned_model as ftm
 from Arfflib.Arfflib import Arfflib
 from DenseNet import fine_tunned_model as ftm
 from DenseNet import DenseNet_HP as hp
@@ -17,14 +12,14 @@ arff_avg_pool = Arfflib("densenet_avg_pool", 1920)
 hook_result = {}
 
 model = ftm.create()
-model.load_state_dict(torch.load('D:\\git\\TCC-2022\\src\\model_chekpoint\\best-densenet_model_44_f1=0.9554_maybe.pt'))
+model.load_state_dict(torch.load('D:\\git\\TCC-2022\\src\\model_chekpoint\\best-densenet_model_33_f1=0.9422.pt'))
 
 def get_features(name):
     def hook(model, input, output):
         #print(len(output))
         aux_array = output.cpu().detach().numpy()
         aux_shape = aux_array.shape
-        print(aux_shape)
+        #print(aux_shape)
         aux_array = aux_array.reshape(aux_shape[1] * aux_shape[2], aux_shape[3])
         aux_array = aux_array.flatten()
         hook_result[name] = aux_array
@@ -47,6 +42,8 @@ train_loader = torch.utils.data.DataLoader(train_data, batch_size=hp.BATCH_SIZE,
 output_value = None
 model.eval()
 
+epoch = 1
+
 print("Starting extraction...")
 for batch_idx, (data, target) in enumerate(train_loader):
     # Se CUDA estiver disponivel, move os tensors para a GPU
@@ -60,7 +57,6 @@ for batch_idx, (data, target) in enumerate(train_loader):
         output_value = 1
 
     arff_avg_pool.append(hook_result["avg_pool"], output_value)
-    #print(f'{hook_result["avg_pool"]} - {output_value}')
 
 print("Extraction completed")
 
