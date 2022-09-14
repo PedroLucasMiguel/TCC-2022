@@ -28,5 +28,3 @@ def create():
         print("CUDA unavailable. Model optimized to use CPU")
 
     return model
-
-create()
