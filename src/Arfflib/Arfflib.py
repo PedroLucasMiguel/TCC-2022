@@ -1,7 +1,7 @@
-class Arfflib(object):
+class Arfflib:
     def __init__(self, file_name: str, n_features: int):
         self.__file_name = file_name
-        self.__file_dir = "Net_Output/Arff_Files/"+file_name+".arff"
+        self.__file_dir = file_name+".arff"
         self.__n_features = n_features
         self.f = open(self.__file_dir, "w")
         #Cria o header e fecha o arquivo

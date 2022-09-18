@@ -1,5 +1,5 @@
 #Parametros para amostras
-BATCH_SIZE = 58
+BATCH_SIZE = 1
 EPOCHS = 50
 
 #Parametros de treino
