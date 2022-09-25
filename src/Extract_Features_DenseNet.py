@@ -12,7 +12,7 @@ arff_avg_pool = Arfflib("densenet_avg_pool", 1920)
 hook_result = {}
 
 model = ftm.create()
-model.load_state_dict(torch.load('D:\\git\\TCC-2022\\src\\model_chekpoint\\best-densenet_model_33_f1=0.9422.pt'))
+model.load_state_dict(torch.load('/home/predo/Git/TCC-2022/src/model_chekpoint/best-densenet_model_33_f1=0.9422.pt'))
 
 def get_features(name):
     def hook(model, input, output):

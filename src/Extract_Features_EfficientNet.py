@@ -6,13 +6,13 @@ from Arfflib.Arfflib import Arfflib
 from EfficientNet import fine_tunned_model as ftm
 from EfficientNet import EfficientNet_HP as hp
 
-arff_avg_pool = Arfflib("efficientnet_avg_pool", 1920)
+arff_avg_pool = Arfflib("efficientnet_avg_pool", 1280)
 
 # Arrays temporarios
 hook_result = {}
 
 model = ftm.create()
-model.load_state_dict(torch.load('D:\\git\\TCC-2022\\src\\model_chekpoint\\best-efficientnet_model_43_f1=0.8867.pt'))
+model.load_state_dict(torch.load('/home/predo/Git/TCC-2022/src/model_chekpoint/best-efficientnet_model_43_f1=0.8867.pt'))
 
 def get_features(name):
     def hook(model, input, output):
